@@ -1,0 +1,52 @@
+#  Dr Kent G Lau
+#  kenty@kenty.com
+
+#  HealthcareSIG Payer Subgroup 2020
+
+
+OrdererOrgs:
+
+  - Name: Orderer
+    Domain: payer.com
+
+    Specs:
+      - Hostname: orderer
+      - Hostname: orderer2
+      - Hostname: orderer3
+      - Hostname: orderer4
+      - Hostname: orderer5
+
+
+PeerOrgs:
+
+  - Name: Payer
+    Domain: payer.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+
+  - Name: Pharmacy
+    Domain: pharmacy.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+
+  - Name: Doctor
+    Domain: doctor.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+
+  - Name: Patient
+    Domain: patient.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
