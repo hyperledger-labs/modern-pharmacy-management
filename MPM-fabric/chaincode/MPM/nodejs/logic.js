@@ -21,11 +21,11 @@ class prescription extends Contract {
 
     let data={
       '001-PRESCRIPTION-ID:':prescriptionId,
-      '002-PATIENT-ID:':data1,
-      '003-PROVIDER-ID:':data2,
-      '004-DOCTOR-ID:':data3,
-      '005-PHARMACY-ID':data4,
-      '006-PAYER-ID':data5,
+      '002-PROVIDER-ID:':data1,
+      '003-MEMBER-ID:':data2,
+      '004-PAYER-ID:':data3,
+      '005-PRESCRIPTION':data4,
+      '006-REMARKS':data5,
       '007-CONSENT:':data6,
        };
 
