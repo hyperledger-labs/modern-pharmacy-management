@@ -17,16 +17,17 @@ class prescription extends Contract {
       return JSON.stringify(data);
      }
 
-   async addRecord(ctx,prescriptionId,data1,data2,data3,data4,data5,data6) {
+   async addRecord(ctx,prescriptionId,data1,data2,data3,data4,data5,data6,data7) {
 
     let data={
       '001-PRESCRIPTION-ID:':prescriptionId,
       '002-PROVIDER-ID:':data1,
-      '003-MEMBER-ID:':data2,
-      '004-PAYER-ID:':data3,
-      '005-PRESCRIPTION':data4,
-      '006-REMARKS':data5,
-      '007-CONSENT:':data6,
+      '003-PHARMACY-ID:':data2,
+      '004-MEMBER-ID:':data3,
+      '005-PAYER-ID:':data4,
+      '006-PRESCRIPTION':data5,
+      '007-REMARKS':data6,
+      '008-CONSENT:':data7
        };
 
     await ctx.stub.putState(prescriptionId,Buffer.from(JSON.stringify(data)));
