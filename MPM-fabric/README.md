@@ -1,10 +1,10 @@
 # fabric-payer1
 
-This project is a use-case example for the [Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) written by [Dr Kent Lau](kenty@kenty.com).
+This project is a use-case example for the [Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) written by [Dr Kent Lau](linkedin.com/in/kentglau).
 
 ## Architecture
 
-4 peers - payer, doctor, pharmacist, patient
+4 peers - payer, provider, pharmacist, member
 
 4 couchDB
 
@@ -14,23 +14,23 @@ Command Line Interface (CLI)
 
 1 channel - prescriptionchannel
 
-1 chaincode - prescriptioncc
+1 chaincode - MPMcc
 
 
 ## Software Spec
 
-Hyperledger Fabric with CouchDB
+Hyperledger Fabric v2.2.0 with CouchDB v0.4
 
 ## Usage
 
 Run automated demo steps:
 
-./1-start.sh
+./1-start-fabric220.sh
 
-./2-prescriptioncc.sh
+./2-MPMcc.sh
 
-./3-addRecord.sh
+./3-MPMaddRecord.sh
 
-./4-queryRecord.sh
+./4-MPMqueryRecord.sh
 
-./5-teardown.sh
+./5-teardown-fabric220.sh

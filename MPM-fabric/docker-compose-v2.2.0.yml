@@ -9,21 +9,21 @@ version: '2'
 # volumes:
 #   orderer.payer.com:
 #   peer0.payer.com:
-#   peer0.doctor.com:
+#   peer0.provider.com:
 #   peer0.pharmacy.com:
-#   peer0.patient.com:
+#   peer0.member.com:
 
 networks:
   basic:
 
 services:
   ca.payer.com:
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:1.4
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.payer.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.payer.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/21595f4ed225cca1085e10df89666c2333b9cfa312566b3a7045c446b937a911_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/d7bdf459fd9cf990df1fda3bad60a07ba0baf5df9bbc05a1f8696d6a78323e02_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -35,7 +35,7 @@ services:
 
   orderer.payer.com:
     container_name: orderer.payer.com
-    image: hyperledger/fabric-orderer
+    image: hyperledger/fabric-orderer:1.4
     environment:
       - FABRIC_LOGGING_SPEC=info
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -56,7 +56,7 @@ services:
 
   peer0.payer.com:
     container_name: peer0.payer.com
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-peer:2.2.0
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.payer.com:7051
@@ -98,7 +98,7 @@ services:
 
   couchdb.peer0.payer.com:
     container_name: couchdb.peer0.payer.com
-    image: hyperledger/fabric-couchdb
+    image: hyperledger/fabric-couchdb:0.4
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -113,7 +113,7 @@ services:
 
   peer0.pharmacy.com:
     container_name: peer0.pharmacy.com
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-peer:2.2.0
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.pharmacy.com:15051
@@ -155,7 +155,7 @@ services:
 
   couchdb.peer0.pharmacy.com:
     container_name: couchdb.peer0.pharmacy.com
-    image: hyperledger/fabric-couchdb
+    image: hyperledger/fabric-couchdb:0.4
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -167,25 +167,25 @@ services:
       - basic
 
 
-  peer0.doctor.com:
-    container_name: peer0.doctor.com
-    image: hyperledger/fabric-peer
+  peer0.provider.com:
+    container_name: peer0.provider.com
+    image: hyperledger/fabric-peer:2.2.0
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.doctor.com:17051
-      - CORE_PEER_ID=peer0.doctor.com
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.provider.com:17051
+      - CORE_PEER_ID=peer0.provider.com
       - FABRIC_LOGGING_SPEC=info
       - CORE_CHAINCODE_LOGGING_LEVEL=info
 #     - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_PEER_LOCALMSPID=DoctorMSP
+      - CORE_PEER_LOCALMSPID=ProviderMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
-      - CORE_PEER_ADDRESS=peer0.doctor.com:17051
+      - CORE_PEER_ADDRESS=peer0.provider.com:17051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
       # # https://docs.docker.com/compose/networking/
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=basic
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.doctor.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.provider.com:5984
       # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
       # provide the credentials for ledger to connect to CouchDB.  The username and password must
       # match the username and password set for the associated CouchDB.
@@ -199,19 +199,19 @@ services:
       - 17053:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/doctor.com/peers/peer0.doctor.com/msp:/etc/hyperledger/msp/peer
-        - ./crypto-config/peerOrganizations/doctor.com/users:/etc/hyperledger/msp/users
+        - ./crypto-config/peerOrganizations/provider.com/peers/peer0.provider.com/msp:/etc/hyperledger/msp/peer
+        - ./crypto-config/peerOrganizations/provider.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:
-      # - orderer.doctor.com
-      - couchdb.peer0.doctor.com
+      # - orderer.provider.com
+      - couchdb.peer0.provider.com
     networks:
       - basic
 
 
-  couchdb.peer0.doctor.com:
-    container_name: couchdb.peer0.doctor.com
-    image: hyperledger/fabric-couchdb
+  couchdb.peer0.provider.com:
+    container_name: couchdb.peer0.provider.com
+    image: hyperledger/fabric-couchdb:0.4
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -225,25 +225,25 @@ services:
 
 
 
-  peer0.patient.com:
-    container_name: peer0.patient.com
-    image: hyperledger/fabric-peer
+  peer0.member.com:
+    container_name: peer0.member.com
+    image: hyperledger/fabric-peer:2.2.0
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.patient.com:19051
-      - CORE_PEER_ID=peer0.patient.com
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.member.com:19051
+      - CORE_PEER_ID=peer0.member.com
       - FABRIC_LOGGING_SPEC=info
       - CORE_CHAINCODE_LOGGING_LEVEL=info
 #     - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_PEER_LOCALMSPID=PatientMSP
+      - CORE_PEER_LOCALMSPID=MemberMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
-      - CORE_PEER_ADDRESS=peer0.patient.com:19051
+      - CORE_PEER_ADDRESS=peer0.member.com:19051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
       # # https://docs.docker.com/compose/networking/
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=basic
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.patient.com:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.member.com:5984
       # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
       # provide the credentials for ledger to connect to CouchDB.  The username and password must
       # match the username and password set for the associated CouchDB.
@@ -257,19 +257,19 @@ services:
       - 19053:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/patient.com/peers/peer0.patient.com/msp:/etc/hyperledger/msp/peer
-        - ./crypto-config/peerOrganizations/patient.com/users:/etc/hyperledger/msp/users
+        - ./crypto-config/peerOrganizations/member.com/peers/peer0.member.com/msp:/etc/hyperledger/msp/peer
+        - ./crypto-config/peerOrganizations/member.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:
-      # - orderer.patient.com
-      - couchdb.peer0.patient.com
+      # - orderer.member.com
+      - couchdb.peer0.member.com
     networks:
       - basic
 
 
-  couchdb.peer0.patient.com:
-    container_name: couchdb.peer0.patient.com
-    image: hyperledger/fabric-couchdb
+  couchdb.peer0.member.com:
+    container_name: couchdb.peer0.member.com
+    image: hyperledger/fabric-couchdb:0.4
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
@@ -284,7 +284,7 @@ services:
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools
+    image: hyperledger/fabric-tools:1.4
     tty: true
     environment:
       - GOPATH=/opt/gopath

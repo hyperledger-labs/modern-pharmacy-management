@@ -99,51 +99,51 @@ Organizations:
               Port: 15051
 
 
-    - &Doctor
+    - &Provider
 
-        Name: DoctorMSP
+        Name: ProviderMSP
 
-        ID: DoctorMSP
+        ID: ProviderMSP
 
-        MSPDir: crypto-config/peerOrganizations/doctor.com/msp
+        MSPDir: crypto-config/peerOrganizations/provider.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('DoctorMSP.admin', 'DoctorMSP.peer', 'DoctorMSP.client')"
+                Rule: "OR('ProviderMSP.admin', 'ProviderMSP.peer', 'ProviderMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('DoctorMSP.admin', 'DoctorMSP.client')"
+                Rule: "OR('ProviderMSP.admin', 'ProviderMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('DoctorMSP.admin')"
+                Rule: "OR('ProviderMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.doctor.com
+            - Host: peer0.provider.com
               Port: 17051
 
 
-    - &Patient
+    - &Member
 
-        Name: PatientMSP
+        Name: MemberMSP
 
-        ID: PatientMSP
+        ID: MemberMSP
 
-        MSPDir: crypto-config/peerOrganizations/patient.com/msp
+        MSPDir: crypto-config/peerOrganizations/member.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('PatientMSP.admin', 'PatientMSP.peer', 'PatientMSP.client')"
+                Rule: "OR('MemberMSP.admin', 'MemberMSP.peer', 'MemberMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('PatientMSP.admin', 'PatientMSP.client')"
+                Rule: "OR('MemberMSP.admin', 'MemberMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('PatientMSP.admin')"
+                Rule: "OR('MemberMSP.admin')"
 
         AnchorPeers:
-            - Host: peer0.patient.com
+            - Host: peer0.member.com
               Port: 19051
 
 
@@ -358,8 +358,8 @@ Profiles:
                 Organizations:
                     - *Payer
                     - *Pharmacy
-                    - *Doctor
-                    - *Patient
+                    - *Provider
+                    - *Member
 
     PrescriptionChannel:
         Consortium: HealthcareSIGConsortium
@@ -369,7 +369,7 @@ Profiles:
             Organizations:
                 - *Payer
                 - *Pharmacy
-                - *Doctor
-                - *Patient
+                - *Provider
+                - *Member
             Capabilities:
                 <<: *ApplicationCapabilities

@@ -68,20 +68,20 @@ sudo docker exec -e "CORE_PEER_LOCALMSPID=PharmacyMSP" -e "CORE_PEER_ADDRESS=pee
 
 echo
 echo "#################################################################"
-echo "#######    Joining peer0.doctor.com to channel   ################"
+echo "#######    Joining peer0.provider.com to channel   ################"
 echo "#################################################################"
 
 ### CLI join peer0.payer.com to the channel.
-sudo docker exec -e "CORE_PEER_LOCALMSPID=DoctorMSP" -e "CORE_PEER_ADDRESS=peer0.doctor.com:7051" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/doctor.com/users/Admin@doctor.com/msp/" cli peer channel join -b prescriptionchannel.block
+sudo docker exec -e "CORE_PEER_LOCALMSPID=ProviderMSP" -e "CORE_PEER_ADDRESS=peer0.provider.com:7051" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/provider.com/users/Admin@provider.com/msp/" cli peer channel join -b prescriptionchannel.block
 
 
 echo
 echo "#################################################################"
-echo "#######    Joining peer0.patient.com to channels   ##############"
+echo "#######    Joining peer0.member.com to channels   ##############"
 echo "#################################################################"
 
 ### CLI join peer0.payer.com to the channel.
-sudo docker exec -e "CORE_PEER_LOCALMSPID=PatientMSP" -e "CORE_PEER_ADDRESS=peer0.patient.com:7051" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/patient.com/users/Admin@patient.com/msp/" cli peer channel join -b prescriptionchannel.block
+sudo docker exec -e "CORE_PEER_LOCALMSPID=MemberMSP" -e "CORE_PEER_ADDRESS=peer0.member.com:7051" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/member.com/users/Admin@member.com/msp/" cli peer channel join -b prescriptionchannel.block
 
 
 echo

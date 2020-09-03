@@ -35,16 +35,16 @@ PeerOrgs:
     Users:
       Count: 1
 
-  - Name: Doctor
-    Domain: doctor.com
+  - Name: Provider
+    Domain: provider.com
     EnableNodeOUs: true
     Template:
       Count: 2
     Users:
       Count: 1
 
-  - Name: Patient
-    Domain: patient.com
+  - Name: Member
+    Domain: member.com
     EnableNodeOUs: true
     Template:
       Count: 2
