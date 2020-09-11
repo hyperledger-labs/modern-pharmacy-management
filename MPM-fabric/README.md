@@ -2,7 +2,6 @@
 
 This project is a use-case example for the [Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) written by [Dr Kent Lau](linkedin.com/in/kentglau).
 
-<p>&nbsp;</p>  
 ## Architecture
 
 4 peers - payer, provider, pharmacist, member
@@ -17,14 +16,12 @@ Command Line Interface (CLI)
 
 1 chaincode - MPMcc
 
-<p>&nbsp;</p>  
 ## Software Spec
 
 hyperledger/fabric:2.2.0
 
 hyperledger/fabric-couchDB:0.4
 
-<p>&nbsp;</p>
 ## Usage
 
 Run automated demo steps:
@@ -40,7 +37,6 @@ Run automated demo steps:
 ./5-teardown-fabric220.sh       # Tears down the network and removes all related containers.
 </pre>
 
-<p>&nbsp;</p>  
 ## Data Elements in MPM Chaincode
 
 
