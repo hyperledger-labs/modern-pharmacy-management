@@ -25,12 +25,24 @@ Hyperledger Fabric v2.2.0 with CouchDB v0.4
 
 Run automated demo steps:
 
-./1-start-fabric220.sh
+./1-start-fabric220.sh		# Starts network, creates channel, connects all peers to channel.
 
-./2-MPMcc.sh
+./2-MPMcc.sh			# Packages, installs and instantiates MPM chaincode.
 
-./3-MPMaddRecord.sh
+./3-MPMaddRecord.sh		# Adds 3 records of dummy data to ledger.
 
-./4-MPMqueryRecord.sh
+./4-MPMqueryRecord.sh		# Queries the data from those 3 records on the ledger.
 
-./5-teardown-fabric220.sh
+./5-teardown-fabric220.sh	# Tears down the network and removes all related containers.
+
+## Data Elements in MPM Chaincode
+
+
+     '001-PRESCRIPTION-ID:':prescriptionId,
+     '002-PROVIDER-ID:':data1,
+     '003-MEMBER-ID:':data2,
+     '004-PAYER-ID:':data3,
+     '005-PRESCRIPTION':data4,
+     '006-REMARKS':data5,
+     '007-CONSENT:':data6,
+
