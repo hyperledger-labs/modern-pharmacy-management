@@ -1,9 +1,8 @@
-# fabric-payer1
+# MPM-fabric
 
 This project is a use-case example for the [Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) written by [Dr Kent Lau](linkedin.com/in/kentglau).
 
-
-
+&nbsp  
 ## Architecture
 
 4 peers - payer, provider, pharmacist, member
@@ -18,13 +17,14 @@ Command Line Interface (CLI)
 
 1 chaincode - MPMcc
 
-
+&nbsp  
 ## Software Spec
 
-Hyperledger Fabric v2.2.0 with CouchDB v0.4
+hyperledger/fabric:2.2.0
 
+hyperledger/fabric-couchDB:0.4
 
-
+&nbsp
 ## Usage
 
 Run automated demo steps:
@@ -40,7 +40,7 @@ Run automated demo steps:
 ./5-teardown-fabric220.sh       # Tears down the network and removes all related containers.
 </pre>
 
-
+&nbsp  
 ## Data Elements in MPM Chaincode
 
 
