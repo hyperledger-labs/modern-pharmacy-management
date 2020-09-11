@@ -1,6 +1,8 @@
 # MPM-fabric
 
-This project is a use-case example for the [Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) written by [Dr Kent Lau](linkedin.com/in/kentglau).
+This project is a use-case example for the \
+[Hyperledger Healthcare Special Interest Group - Payer Subgroup](https://wiki.hyperledger.org/display/HCSIG/HC-SIG+-+Payer+Subgroup) \
+written by [Dr Kent Lau](linkedin.com/in/kentglau).
 
 ## Architecture
 
@@ -16,9 +18,13 @@ Command Line Interface (CLI)
 
 1 chaincode - MPMcc
 
-## Software Spec
+## Fabric v2.2.0 Specification
 
-hyperledger/fabric:2.2.0
+hyperledger/fabric-ca:1.4
+
+hyperledger/fabric-peer:2.2.0
+
+hyperledger/fabric-orderer:1.4
 
 hyperledger/fabric-couchDB:0.4
 
@@ -48,3 +54,18 @@ Run automated demo steps:
      '006-REMARKS':data5,
      '007-CONSENT:':data6,
 
+## Docker Containers
+
+<pre>
+ca.payer.com
+orderer.payer.com
+peer0.payer.com
+peer0.member.com
+peer0.pharmacy.com
+peer0.provider.com
+couchdb.peer0.payer.com
+couchdb.peer0.member.com
+couchdb.peer0.pharmacy.com
+couchdb.peer0.provider.com
+cli
+</pre/>
